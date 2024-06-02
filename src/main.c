@@ -1,4 +1,5 @@
 #include "queue.h"/*<stdio.h> <malloc.h> <stdint.h>*/
+#include <stdio.h>
 
 /* Дан файл из целых чисел.Используя очередь,
 за один просмотр файла напечатать сначала все отрицательные числа,
@@ -18,12 +19,27 @@ int main(int argc, const char *args[])
 		return 1;
 	}
 
-	queue *q_positive = QueueInit();
-	queue *q_negative = QueueInit();
+	queue *q_positive = QueueInit(), *q_negative = QueueInit();
+	if(!(q_negative && q_positive))
+	{
+		perror("malloc");
+		fclose(source);
+		return 2;
+	}
 
-	for (int8_t buf;												//Буфер
-		fscanf(source, "%hhd", &buf) > 0;							//Чтение из файла в буфер
-		QueuePushToEnd(buf, (buf < 0) ? q_negative : q_positive));	//Добавление из буфера в очередь
+	for (int8_t errCode = 0, buf;			//Буфер
+		fscanf(source, "%hhd", &buf) > 0;	//Чтение из файла в буфер
+		errCode = QueuePushToEnd(buf, (buf < 0) ?	//Добавление из буфера в очередь
+						q_negative ://Отрицательных чисел
+						q_positive))//Неотрицательных чисел
+		if(errCode)
+		{
+			QueueFree(&q_positive);
+			QueueFree(&q_negative);
+			perror("queue push");
+			fclose(source);
+			return 2;
+		};	
 
 	fclose(source);
 
