@@ -23,7 +23,7 @@ void QueueFree(queue **qptr)
 	struct part *tmp = (*qptr)->head;
 	(*qptr)->head = (*qptr)->head->next;
 	free(tmp);
-	return qptrueueFree(qptr);
+	return QueueFree(qptr);
 };
 
 uint8_t QueuePushToHead(int8_t num, queue *q)
@@ -53,6 +53,7 @@ uint8_t QueuePushToEnd(int8_t num, queue *q)
 		return -1;
 
 	buf->num = num;
+	buf->next = NULL;
 
 	if (!q->tail)
 	{
@@ -61,6 +62,7 @@ uint8_t QueuePushToEnd(int8_t num, queue *q)
 		return 0;
 	}
 
+	q->tail->next = buf;
 	q->tail = buf;
 	return 0;
 };
