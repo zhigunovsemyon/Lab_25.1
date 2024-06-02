@@ -122,6 +122,11 @@ void QueueBubbleSort(queue *q, int16_t(cmp)(int8_t, int8_t))
 {
 	uint16_t flag = 0;
 
+	if (!q->head)
+		return;
+	if (!q->head->next)
+		return;
+
 	if (flag)
 		QueueBubbleSort(q, cmp);
 }
