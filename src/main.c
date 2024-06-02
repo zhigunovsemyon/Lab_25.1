@@ -27,13 +27,13 @@ int main(int argc, const char *args[])
 
 	fclose(source);
 
-	puts("Очередь положительных чисел:");
+	puts("Очередь неотрицательных чисел:");
 	for (int8_t buf;				//Буфер
 		!QueuePullFromHead(&buf, q_positive); 	//Чтение из очереди в буфер
 		printf("%hhd ", buf));		//Вывод из буфера на экран
 	putchar('\n');
 
-	puts("Очередь отрицательных чисел :");
+	puts("Очередь отрицательных чисел:");
 	for (int8_t buf;						   // Буфер
 		 !QueuePullFromHead(&buf, q_negative); // Чтение из очереди в буфер
 		 printf("%hhd ", buf)); // Вывод из буфера на экран
