@@ -1,4 +1,4 @@
-#include "queue.h"/*<stdio.h> <malloc.h> <stdint.h>*/
+#include "queue.h" /*<stdio.h> <malloc.h> <stdint.h>*/
 #include <stdio.h>
 
 /* Дан файл из целых чисел.Используя очередь,
@@ -20,39 +20,42 @@ int main(int argc, const char *args[])
 	}
 
 	queue *q_positive = QueueInit(), *q_negative = QueueInit();
-	if(!(q_negative && q_positive))
+	if (!(q_negative && q_positive))
 	{
 		perror("malloc");
 		fclose(source);
 		return 2;
 	}
 
-	for (int8_t errCode = 0, buf;			//Буфер
-		fscanf(source, "%hhd", &buf) > 0;	//Чтение из файла в буфер
-		errCode = QueuePushToEnd(buf, (buf < 0) ?	//Добавление из буфера в очередь
-						q_negative ://Отрицательных чисел
-						q_positive))//Неотрицательных чисел
-		if(errCode)
+	for (int8_t errCode = 0, buf;		   // Буфер
+		 fscanf(source, "%hhd", &buf) > 0; // Чтение из файла в буфер
+		 errCode = QueuePushToEnd(
+			 buf, (buf < 0) ? // Добавление из буфера в очередь
+					  q_negative // Отрицательных чисел
+							: q_positive)) // Неотрицательных чисел
+		if (errCode)
 		{
 			QueueFree(&q_positive);
 			QueueFree(&q_negative);
 			perror("queue push");
 			fclose(source);
 			return 2;
-		};	
+		};
 
 	fclose(source);
 
 	puts("Очередь неотрицательных чисел:");
-	for (int8_t buf;				//Буфер
-		!QueuePullFromHead(&buf, q_positive); 	//Чтение из очереди в буфер
-		printf("%hhd ", buf));		//Вывод из буфера на экран
+	for (int8_t buf;						   // Буфер
+		 !QueuePullFromHead(&buf, q_positive); // Чтение из очереди в буфер
+		 printf("%hhd ", buf)) // Вывод из буфера на экран
+		;
 	putchar('\n');
 
 	puts("Очередь отрицательных чисел:");
 	for (int8_t buf;						   // Буфер
 		 !QueuePullFromHead(&buf, q_negative); // Чтение из очереди в буфер
-		 printf("%hhd ", buf)); // Вывод из буфера на экран
+		 printf("%hhd ", buf)) // Вывод из буфера на экран
+		;
 	putchar('\n');
 
 	QueueFree(&q_positive);
