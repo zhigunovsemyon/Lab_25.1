@@ -16,6 +16,8 @@ uint8_t QueuePushToEnd(int8_t, queue *);
 uint8_t QueuePullFromHead(int8_t *, queue *);
 uint8_t QueuePullFromEnd(int8_t *, queue *);
 
+int16_t QueueIncreaseCmp(int8_t a, int8_t b);
+int16_t QueueDecreaseCmp(int8_t a, int8_t b);
 void QueueBubbleSort(queue *, int16_t(cmp)(int8_t, int8_t));
 
 #endif // !_QUEUE_H

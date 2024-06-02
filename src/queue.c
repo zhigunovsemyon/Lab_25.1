@@ -107,3 +107,21 @@ uint8_t QueuePullFromEnd(int8_t *ret, queue *q)
 	q->tail = pre_tail;
 	return 0;
 };
+
+int16_t QueueIncreaseCmp(int8_t a, int8_t b)
+{
+	return a - b;
+}
+
+int16_t QueueDecreaseCmp(int8_t a, int8_t b)
+{
+	return b - a;
+}
+
+void QueueBubbleSort(queue *q, int16_t(cmp)(int8_t, int8_t))
+{
+	uint16_t flag = 0;
+
+	if (flag)
+		QueueBubbleSort(q, cmp);
+}
