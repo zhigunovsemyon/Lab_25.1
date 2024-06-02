@@ -124,6 +124,13 @@ int16_t QueueDecreaseCmp(int8_t arg1, int8_t arg2)
 	return (arg1 < arg2) - (arg1 > arg2);
 }
 
+static void SwapValue(int8_t *a, int8_t *b)
+{
+	int8_t tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 void QueueBubbleSort(queue *q, int16_t(cmp)(int8_t, int8_t))
 {
 	uint16_t flag = 0;
@@ -133,10 +140,22 @@ void QueueBubbleSort(queue *q, int16_t(cmp)(int8_t, int8_t))
 	if (!q->head->next)
 		return;
 
-	int8_t	a = q->head->num, 
-			b = q->head->next->num;
-	if (0 < cmp(a, b))
+	struct part *a = q->head, 
+			*b = q->head->next;
 
+	while(b /*!= NULL*/)
+	{
+		// Если сортировщик вернул >0, элементы меняются местами, поднимается флаг
+		if (0 < cmp(a->num, b->num))
+		{
+			flag++;
+			SwapValue(&a->num, &b->num);
+		}
+
+		a = b;
+		b = a->next;
+	}
+	
 	if (flag)
 		QueueBubbleSort(q, cmp);
 }
