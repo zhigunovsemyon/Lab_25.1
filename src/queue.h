@@ -18,5 +18,15 @@ typedef struct
 }
 queue;
 
+queue *QueueInit(void);
+void QueueFree(void);
+
+uint8_t QueuePushToHead(int8_t);
+uint8_t QueuePushToEnd(int8_t);
+
+int8_t QueuePullFromHead(int8_t);
+int8_t QueuePullFromEnd(int8_t);
+
+
 #endif // !_QUEUE_H
 
