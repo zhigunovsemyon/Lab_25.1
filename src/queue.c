@@ -90,6 +90,7 @@ uint8_t QueuePullFromEnd(int8_t *ret, queue *q)
 	{
 		free(pre_tail);
 		q->head = q->tail = NULL;
+		return 0;
 	}
 
 	while (pre_tail->next->next)
@@ -98,4 +99,5 @@ uint8_t QueuePullFromEnd(int8_t *ret, queue *q)
 	free(pre_tail->next);
 	pre_tail->next = NULL;
 	q->tail = pre_tail;
+	return 0;
 };
