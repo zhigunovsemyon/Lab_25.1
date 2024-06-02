@@ -108,14 +108,20 @@ uint8_t QueuePullFromEnd(int8_t *ret, queue *q)
 	return 0;
 };
 
-int16_t QueueIncreaseCmp(int8_t a, int8_t b)
+int16_t QueueIncreaseCmp(int8_t arg1, int8_t arg2)
 {
-	return a - b;
+	// Если arg1 > arg2 == 1 - 0, возврат 1
+	// Если arg1 < arg2 == 0 - 1, возврат -1
+	// Если arg1 = arg2 == 0 - 0, возврат 0
+	return (arg1 > arg2) - (arg1 < arg2);
 }
 
-int16_t QueueDecreaseCmp(int8_t a, int8_t b)
+int16_t QueueDecreaseCmp(int8_t arg1, int8_t arg2)
 {
-	return b - a;
+	// Если arg1 < arg2 == 1 - 0, возврат 1
+	// Если arg1 > arg2 == 0 - 1, возврат -1
+	// Если arg1 = arg2 == 0 - 0, возврат 0
+	return (arg1 < arg2) - (arg1 > arg2);
 }
 
 void QueueBubbleSort(queue *q, int16_t(cmp)(int8_t, int8_t))
@@ -126,6 +132,10 @@ void QueueBubbleSort(queue *q, int16_t(cmp)(int8_t, int8_t))
 		return;
 	if (!q->head->next)
 		return;
+
+	int8_t	a = q->head->num, 
+			b = q->head->next->num;
+	if (0 < cmp(a, b))
 
 	if (flag)
 		QueueBubbleSort(q, cmp);
