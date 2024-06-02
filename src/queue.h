@@ -19,13 +19,13 @@ typedef struct
 queue;
 
 queue *QueueInit(void);
-void QueueFree(void);
+void QueueFree(queue **);
 
-uint8_t QueuePushToHead(int8_t);
-uint8_t QueuePushToEnd(int8_t);
+uint8_t QueuePushToHead(int8_t, queue *);
+uint8_t QueuePushToEnd(int8_t, queue *);
 
-int8_t QueuePullFromHead(int8_t);
-int8_t QueuePullFromEnd(int8_t);
+uint8_t QueuePullFromHead(int8_t *, queue *);
+uint8_t QueuePullFromEnd(int8_t *, queue *);
 
 
 #endif // !_QUEUE_H
