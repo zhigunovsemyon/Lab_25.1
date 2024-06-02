@@ -5,12 +5,6 @@
 #include <malloc.h>
 #include <stdint.h>
 
-struct part
-{
-	int8_t num;
-	struct part *next;
-};
-
 typedef struct 
 {
 	struct part *head;
