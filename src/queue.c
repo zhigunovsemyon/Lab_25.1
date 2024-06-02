@@ -6,6 +6,12 @@ struct part
 	struct part *next;
 };
 
+struct queue
+{
+	struct part *head;
+	struct part *tail;
+};
+
 queue *QueueInit(void)
 {
 	return (queue *)calloc(1, sizeof(queue));

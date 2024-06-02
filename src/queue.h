@@ -5,11 +5,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-typedef struct
-{
-	struct part *head;
-	struct part *tail;
-} queue;
+typedef struct queue queue;
 
 queue *QueueInit(void);
 void QueueFree(queue **);
