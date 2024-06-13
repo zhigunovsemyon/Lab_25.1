@@ -32,7 +32,7 @@ void QueueFree(queue **qptr)
 	return QueueFree(qptr);
 };
 
-uint8_t QueuePushToHead(int8_t num, queue *q)
+int8_t QueuePushToHead(int8_t num, queue *q)
 {
 	struct part *buf = (struct part *)malloc(sizeof(struct part));
 	if (!buf)
@@ -52,7 +52,7 @@ uint8_t QueuePushToHead(int8_t num, queue *q)
 	return 0;
 };
 
-uint8_t QueuePushToEnd(int8_t num, queue *q)
+int8_t QueuePushToEnd(int8_t num, queue *q)
 {
 	struct part *buf = (struct part *)malloc(sizeof(struct part));
 	if (!buf)
@@ -73,7 +73,7 @@ uint8_t QueuePushToEnd(int8_t num, queue *q)
 	return 0;
 };
 
-uint8_t QueuePullFromHead(int8_t *ret, queue *q)
+int8_t QueuePullFromHead(int8_t *ret, queue *q)
 {
 	if (!q->head)
 		return 1;
@@ -85,7 +85,7 @@ uint8_t QueuePullFromHead(int8_t *ret, queue *q)
 	return 0;
 };
 
-uint8_t QueuePullFromEnd(int8_t *ret, queue *q)
+int8_t QueuePullFromEnd(int8_t *ret, queue *q)
 {
 	if (!q->tail)
 		return 1;
@@ -108,7 +108,7 @@ uint8_t QueuePullFromEnd(int8_t *ret, queue *q)
 	return 0;
 };
 
-int16_t QueueIncreaseCmp(int8_t arg1, int8_t arg2)
+int8_t QueueIncreaseCmp(int8_t arg1, int8_t arg2)
 {
 	// Если arg1 > arg2 == 1 - 0, возврат 1
 	// Если arg1 < arg2 == 0 - 1, возврат -1
@@ -116,7 +116,7 @@ int16_t QueueIncreaseCmp(int8_t arg1, int8_t arg2)
 	return (arg1 > arg2) - (arg1 < arg2);
 }
 
-int16_t QueueDecreaseCmp(int8_t arg1, int8_t arg2)
+int8_t QueueDecreaseCmp(int8_t arg1, int8_t arg2)
 {
 	// Если arg1 < arg2 == 1 - 0, возврат 1
 	// Если arg1 > arg2 == 0 - 1, возврат -1
@@ -131,7 +131,7 @@ static void SwapValue(int8_t *a, int8_t *b)
 	*b = tmp;
 }
 
-void QueueBubbleSort(queue *q, int16_t(cmp)(int8_t, int8_t))
+void QueueBubbleSort(queue *q, int8_t(cmp)(int8_t, int8_t))
 {
 	uint16_t flag = 0;
 
